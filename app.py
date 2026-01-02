@@ -1,22 +1,14 @@
-# Uber Fare Prediction App using Streamlit
-
 import streamlit as st
 import pickle
 import numpy as np
 
-# Load trained model
+# Loading trained model
 with open("model.pkl", "rb") as file:
     model = pickle.load(file)
-
-# Page configuration
 st.set_page_config(page_title="Uber Fare Prediction", layout="centered")
-
-# App title and description
 st.markdown("<h1 style='text-align: center; color: #FF4B4B;'>Uber Fare Prediction App</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>Enter ride details below to predict the fare.</p>", unsafe_allow_html=True)
 st.write("---")
-
-# Columns for inputs
 col1, col2 = st.columns(2)
 
 with col1:
@@ -30,7 +22,6 @@ with col2:
     dropoff_latitude = st.slider("Dropoff Latitude", 40.6, 40.9, 40.72)
     pickup_day = st.slider("Day of the Week (1=Monday, 7=Sunday)", 1, 7, 3)
 
-# Predict button
 if st.button("Predict Fare"):
     features = np.array([[pickup_longitude, pickup_latitude,
                           dropoff_longitude, dropoff_latitude,
